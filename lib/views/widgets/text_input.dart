@@ -14,15 +14,21 @@ class TextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: Colors.white,
       obscureText: isPassword,
       style: Theme.of(context)
           .textTheme
           .titleMedium!
           .copyWith(color: Colors.white),
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(18),
         hintText: hintText,
         hintStyle: const TextStyle(color: Colors.white),
         border: const OutlineInputBorder(),
+        enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textFormColor)),
+        focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textFormColor)),
         fillColor: AppColors.textFormColor,
         filled: true,
         prefixIcon: Icon(
