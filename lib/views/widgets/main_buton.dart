@@ -2,10 +2,21 @@ import 'package:day_task/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton(
-      {super.key, required this.textButton, required this.onPressed});
+  const MainButton({
+    super.key,
+    required this.textButton,
+    required this.onPressed,
+    this.backColor = AppColors.mainColor,
+    this.border,
+    this.textColor = Colors.black,
+    this.icon,
+  });
   final String textButton;
   final VoidCallback onPressed;
+  final Color backColor;
+  final Color textColor;
+  final BorderSide? border;
+  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +26,27 @@ class MainButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.mainColor,
-          foregroundColor: Colors.black,
+          backgroundColor: backColor,
+          foregroundColor: textColor,
+          side: border,
         ),
-        child: Text(
-          textButton,
-          style: const TextStyle(fontSize: 24),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon ??
+                const SizedBox(
+                  width: 0,
+                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                textButton,
+                style: const TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
