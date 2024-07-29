@@ -6,10 +6,12 @@ class TextInput extends StatelessWidget {
       {super.key,
       required this.hintText,
       required this.prefixIcon,
-      this.isPassword = false});
+      this.isPassword = false,
+      required this.continueValidate});
   final String hintText;
   final IconData prefixIcon;
   final bool isPassword;
+  final String? Function(String) continueValidate;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,12 @@ class TextInput extends StatelessWidget {
           .textTheme
           .titleMedium!
           .copyWith(color: Colors.white),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Field is required';
+        }
+        return continueValidate(value);
+      },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(18),
         hintText: hintText,

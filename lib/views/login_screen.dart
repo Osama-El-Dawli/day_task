@@ -1,12 +1,14 @@
 import 'package:day_task/utils/app_colors.dart';
 import 'package:day_task/utils/images_string.dart';
 import 'package:day_task/views/widgets/continue_with.dart';
+import 'package:day_task/views/widgets/custom_snackbar.dart';
 import 'package:day_task/views/widgets/fields_entery.dart';
 import 'package:day_task/views/widgets/main_buton.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   Image.asset(ImagesString.logo),
@@ -35,7 +38,14 @@ class LoginScreen extends StatelessWidget {
                   ),
                   MainButton(
                     textButton: 'Login',
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const CustomSnackBar(
+                          content: 'Login Successfull',
+                        ) as SnackBar);
+                      }
+                    },
                   ),
                   const SizedBox(
                     height: 24,

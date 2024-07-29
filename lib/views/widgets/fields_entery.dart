@@ -37,9 +37,15 @@ class FieldsEntery extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              const TextInput(
+              TextInput(
                 hintText: 'Enter Your Full Name',
                 prefixIcon: Icons.person_rounded,
+                continueValidate: (text) {
+                  if (text.length < 10) {
+                    return 'At least 10 characters';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(
                 height: 16,
@@ -55,9 +61,17 @@ class FieldsEntery extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        const TextInput(
+        TextInput(
           hintText: 'Enter Your Email',
           prefixIcon: Icons.email,
+          continueValidate: (emailText) {
+            final regExp = RegExp(
+                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+            if (!regExp.hasMatch(emailText)) {
+              return 'Email isn\'t valid';
+            }
+            return null;
+          },
         ),
         const SizedBox(
           height: 16,
@@ -71,7 +85,13 @@ class FieldsEntery extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        const TextInput(
+        TextInput(
+          continueValidate: (password) {
+            if (password.length < 8) {
+              return 'At least 8 characters';
+            }
+            return null;
+          },
           hintText: 'Enter Your Password',
           prefixIcon: Icons.lock,
           isPassword: true,
