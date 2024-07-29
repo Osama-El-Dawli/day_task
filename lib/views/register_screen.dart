@@ -1,14 +1,21 @@
 import 'package:day_task/utils/app_colors.dart';
 import 'package:day_task/utils/images_string.dart';
 import 'package:day_task/views/widgets/continue_with.dart';
-import 'package:day_task/views/widgets/custom_snackbar.dart';
 import 'package:day_task/views/widgets/fields_entery.dart';
 import 'package:day_task/views/widgets/main_buton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,9 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(ImagesString.logo),
-                  const FieldsEntery(
+                  FieldsEntery(
+                    emailController: TextEditingController(),
+                    passwordController: TextEditingController(),
                     isRegistered: true,
                   ),
                   const SizedBox(
@@ -57,8 +66,23 @@ class RegisterScreen extends StatelessWidget {
                     textButton: 'Sign Up',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const CustomSnackBar(content: 'Register Successful',) as SnackBar);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Center(
+                              child: Text(
+                            'Register successfull',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(color: Colors.white),
+                          )),
+                          behavior: SnackBarBehavior.floating,
+                          margin: const EdgeInsets.all(24),
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: AppColors.textFormColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                        ));
                       }
                     },
                   ),

@@ -3,8 +3,10 @@ import 'package:day_task/views/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 
 class FieldsEntery extends StatelessWidget {
-  const FieldsEntery({super.key, this.isRegistered = false});
+  const FieldsEntery({super.key, this.isRegistered = false, required this.emailController, required this.passwordController});
   final bool isRegistered;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +64,13 @@ class FieldsEntery extends StatelessWidget {
           height: 8,
         ),
         TextInput(
+          controller: emailController,
           hintText: 'Enter Your Email',
           prefixIcon: Icons.email,
           continueValidate: (emailText) {
             final regExp = RegExp(
                 r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-            if (!regExp.hasMatch(emailText)) {
+            if (!regExp.hasMatch(emailText.trim())) {
               return 'Email isn\'t valid';
             }
             return null;
@@ -86,6 +89,7 @@ class FieldsEntery extends StatelessWidget {
           height: 8,
         ),
         TextInput(
+          controller: passwordController,
           continueValidate: (password) {
             if (password.length < 8) {
               return 'At least 8 characters';

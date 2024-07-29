@@ -7,11 +7,12 @@ class TextInput extends StatelessWidget {
       required this.hintText,
       required this.prefixIcon,
       this.isPassword = false,
-      required this.continueValidate});
+      required this.continueValidate, this.controller});
   final String hintText;
   final IconData prefixIcon;
   final bool isPassword;
   final String? Function(String) continueValidate;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {

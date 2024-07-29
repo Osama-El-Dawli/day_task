@@ -11,9 +11,9 @@ class AppRouts {
   static Route<dynamic> generateRouts(RouteSettings settings) {
     switch (settings.name) {
       case AppRouts.loginRout:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRouts.registerRout:
-        return MaterialPageRoute(builder: (_) => RegisterScreen());
+        return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case AppRouts.splashRout:
       default:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
