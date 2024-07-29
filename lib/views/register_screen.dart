@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                         value: true,
                         checkColor: AppColors.backgroundColor,
                         fillColor:
-                            const MaterialStatePropertyAll(AppColors.mainColor),
+                            const WidgetStatePropertyAll(AppColors.mainColor),
                         onChanged: (value) {},
                       ),
                       Expanded(
