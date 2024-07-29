@@ -1,4 +1,5 @@
 import 'package:day_task/utils/app_colors.dart';
+import 'package:day_task/utils/functions/show_snackbar.dart';
 import 'package:day_task/utils/images_string.dart';
 import 'package:day_task/views/widgets/continue_with.dart';
 import 'package:day_task/views/widgets/fields_entery.dart';
@@ -59,25 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                             .then((user) {});
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Center(
-                                child: Text(
-                              'Login successfull',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(color: Colors.white),
-                            )),
-                            behavior: SnackBarBehavior.floating,
-                            margin: const EdgeInsets.all(24),
-                            duration: const Duration(seconds: 2),
-                            backgroundColor: AppColors.textFormColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                          ),
-                        );
+                        showSnackBar(context, 'Login successfull');
                       }
                     },
                   ),
