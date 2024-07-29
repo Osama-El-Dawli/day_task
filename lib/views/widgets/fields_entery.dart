@@ -3,7 +3,11 @@ import 'package:day_task/views/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 
 class FieldsEntery extends StatelessWidget {
-  const FieldsEntery({super.key, this.isRegistered = false, required this.emailController, required this.passwordController});
+  const FieldsEntery(
+      {super.key,
+      this.isRegistered = false,
+      required this.emailController,
+      required this.passwordController});
   final bool isRegistered;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -43,9 +47,6 @@ class FieldsEntery extends StatelessWidget {
                 hintText: 'Enter Your Full Name',
                 prefixIcon: Icons.person_rounded,
                 continueValidate: (text) {
-                  if (text.length < 10) {
-                    return 'At least 10 characters';
-                  }
                   return null;
                 },
               ),

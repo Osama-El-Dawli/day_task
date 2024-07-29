@@ -17,6 +17,8 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Image.asset(ImagesString.logo),
                   FieldsEntery(
-                    emailController: TextEditingController(),
-                    passwordController: TextEditingController(),
+                    emailController: _emailController,
+                    passwordController: _passwordController,
                     isRegistered: true,
                   ),
                   const SizedBox(
@@ -67,6 +69,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     textButton: 'Sign Up',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        _auth.createUserWithEmailAndPassword(
+                            email: _emailController.text.trim(),
+                            password: _passwordController.text);
                         showSnackBar(context, 'Register successfull');
                       }
                     },
